@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python environments
+env/
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# Logs
+logs/
+
+# Data (VERY important for your DAWN dataset)
+data/
+data/*
+
+# Cache files
+*.cache
