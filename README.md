@@ -12,8 +12,8 @@ Sparse component (S) — weather artifacts such as rain, snow, dust, or noise
 This repository contains the full pipeline including preprocessing, PCP implementation, visualization tools, and quantitative metrics for comparing decomposition behavior across weather types.
 
 ### Folder Structure
-```
 
+```
 down_pcp_project/
 │
 ├── notebooks/
@@ -37,6 +37,7 @@ down_pcp_project/
 ├── requirements.txt
 └── README.md
 ```
+
 ⚠️ Important:
 The data/ folder is NOT included in the repository.
 You must download and place the DAWN dataset locally before running the notebook.
@@ -49,6 +50,7 @@ Download the DAWN dataset from:
 Extract the dataset.
 
 Inside this repository, create the following structure:
+
 ```
 down_pcp_project/data/images/
     dusttornado/
@@ -63,6 +65,7 @@ down_pcp_project/data/images/
 Copy the images into their corresponding folders.
 
 Your image paths should look like:
+
 ```
 down_pcp_project/data/images/foggy/foggy-001.jpg
 ```
