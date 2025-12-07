@@ -140,3 +140,82 @@ def visualize_decomposition(
 
     plt.tight_layout()
     plt.show()
+
+def visualize_decomposition_minimal(
+    X,
+    L,
+    S,
+    sparse_threshold=1e-3,
+    cmap_main="gray",
+    figsize=(11, 5),
+    title_prefix=""
+):
+    """
+    Minimal, publication-ready visualization of PCP decomposition.
+    6 panels:
+      [Original | Low-rank L | Sparse S]
+      [Sparse rescaled | Sparse tight-range | Mask overlay]
+
+    Designed to fit well in reports with minimal ink and visual clutter.
+    """
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    X = np.asarray(X)
+    L = np.asarray(L)
+    S = np.asarray(S)
+
+    # Compute mask + rescaled sparse map
+    mask = np.abs(S) > sparse_threshold
+    S_min, S_max = S.min(), S.max()
+    S_rescaled = (S - S_min) / (S_max - S_min + 1e-12)
+
+    # Tight symmetric range for seismic map
+    vmax = max(np.abs(S.min()), np.abs(S.max()))
+    vmax = max(vmax, 1e-6)
+
+    fig, axes = plt.subplots(2, 3, figsize=figsize)
+
+    # A helper to reduce code
+    def show(ax, img, cmap="gray", title=""):
+        ax.imshow(img, cmap=cmap)
+        ax.set_title(title, fontsize=10)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+
+    # Row 1
+    show(axes[0, 0], X, cmap_main, f"{title_prefix}Original")
+    show(axes[0, 1], L, cmap_main, "Low-rank")
+    show(axes[0, 2], S, "gray", "Sparse")
+
+    # Row 2
+    show(axes[1, 0], S_rescaled, "gray", "Sparse (rescaled)")
+    
+    im = axes[1, 1].imshow(S, cmap="seismic", vmin=-vmax, vmax=vmax)
+    axes[1, 1].set_title("Sparse (tight range)", fontsize=10)
+    axes[1, 1].set_xticks([])
+    axes[1, 1].set_yticks([])
+    for spine in axes[1, 1].spines.values():
+        spine.set_visible(False)
+    
+    # Slim colorbar
+    cbar = fig.colorbar(im, ax=axes[1, 1], fraction=0.035, pad=0.02)
+    cbar.ax.tick_params(labelsize=8)
+
+    # Mask overlay
+    ax = axes[1, 2]
+    ax.imshow(X, cmap=cmap_main)
+    ax.imshow(mask, cmap="autumn", alpha=0.35)
+    ax.set_title(f"Mask", fontsize=10)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+    plt.tight_layout(pad=0.5)
+    plt.show()
+
+    return fig

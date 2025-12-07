@@ -8,7 +8,7 @@ from PIL import Image
 
 def load_dawn_images(
     root_dir,
-    target_size=(128, 256),   # (H, W)
+    target_size=(128, 256),
     normalize=True,
     max_per_category=None,
 ):
