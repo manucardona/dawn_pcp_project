@@ -1,4 +1,4 @@
-# pcp.py (or similar cell)
+# pcp.py
 
 import numpy as np
 

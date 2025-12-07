@@ -159,9 +159,6 @@ def visualize_decomposition_minimal(
     Designed to fit well in reports with minimal ink and visual clutter.
     """
 
-    import matplotlib.pyplot as plt
-    import numpy as np
-
     X = np.asarray(X)
     L = np.asarray(L)
     S = np.asarray(S)

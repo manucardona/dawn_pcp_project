@@ -1,4 +1,4 @@
-# io_utils.py (or first cell)
+# io_utils.py
 
 import os
 from glob import glob

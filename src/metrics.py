@@ -1,4 +1,4 @@
-# metrics.py (or another cell)
+# metrics.py
 import numpy as np
 from pcp import pcp_inexact_alm
 
